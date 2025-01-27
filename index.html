@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce webapage using fetch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+    </div>
+    
+    <script>
+        const div = document.querySelector("#container");
+        const data = fetch("https://fakestoreapi.com/products")
+            .then(response => response.json())
+            .then((result) => {
+                result.forEach(user => {
+                    const product = document.createElement("div");
+                    product.classList.add("product");
+
+                    const img = document.createElement("img");
+                    img.src = user.image;
+
+                    product.append(img);
+                    div.append(product);
+                });
+            });
+
+ 
+
+            
+            
+    </script>
+</body>
+</html>
