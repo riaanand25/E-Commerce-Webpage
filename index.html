@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav class="navbar">
+        <div id="wrapper">
+            <h1>E-Commerce</h1>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="">Cart</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div id="container">
     </div>
     
@@ -14,16 +27,42 @@
     
        const div = document.querySelector("#container")
        const data = fetch("https://fakestoreapi.in/api/products")
-       .then(response=>response.json())
-       .then((result)=>{
-        result.forEach(user => {
+       .then(response=>response.json()).then((result)=>{
+        result.products.forEach(user => {
             const product = document.createElement("div")
             product.classList.add("product")
+           
 
             const img = document.createElement("img")
             img.src = user.image
 
+            const title = document.createElement("h4")
+            title.classList.add("title")
+            title.innerHTML = `${user.title}`
+
+            const price = document.createElement("span")
+            price.classList.add("price")
+            price.innerHTML = `$: ${user.price}`
+            price.style.fontSize = "25px";
+
+
+            const btn_grp = document.createElement("div")
+            btn_grp.classList.add("button-group")
+
+            const add = document.createElement("button")
+            add.classList.add("wishlist")
+            add.innerHTML = "Add to Wishlist"
+
+            const cart = document.createElement("button")
+            cart.classList.add("cart")
+            cart.innerHTML = "Add to cart"
+
+            btn_grp.prepend(cart)
+            btn_grp.prepend(add)
             product.append(img)
+            product.append(title)
+            product.append(price)
+            product.append(btn_grp)
             div.append(product)
         });
        })
