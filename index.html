@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-commerce webapage using fetch</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <!-- <video src="https://www.3edgetechnologies.com/wp-content/uploads/2023/06/pexels-mikhail-nilov-7989682-1920x1080-25fps.mp4" controls autoplay
+    ></video> -->
     <nav class="navbar">
         <div id="wrapper">
             <h1>E-Commerce</h1>
@@ -22,53 +26,63 @@
 
     <div id="container">
     </div>
-    
+
     <script>
-    
-       const div = document.querySelector("#container")
-       const data = fetch("https://fakestoreapi.in/api/products")
-       .then(response=>response.json()).then((result)=>{
-        result.products.forEach(user => {
-            const product = document.createElement("div")
-            product.classList.add("product")
-           
 
-            const img = document.createElement("img")
-            img.src = user.image
+        const div = document.querySelector("#container")
+        const data = fetch("https://fakestoreapi.in/api/products")
+            .then(response => response.json()).then((result) => {
+                result.products.forEach(user => {
+                    const product = document.createElement("div")
+                    product.classList.add("product")
 
-            const title = document.createElement("h4")
-            title.classList.add("title")
-            title.innerHTML = `${user.title}`
-
-            const price = document.createElement("span")
-            price.classList.add("price")
-            price.innerHTML = `$: ${user.price}`
-            price.style.fontSize = "25px";
+                   
+                    const img = document.createElement("img")
+                    img.src = user.image
 
 
-            const btn_grp = document.createElement("div")
-            btn_grp.classList.add("button-group")
 
-            const add = document.createElement("button")
-            add.classList.add("wishlist")
-            add.innerHTML = "Add to Wishlist"
+                    const title = document.createElement("h4");
+                    title.classList.add("title");
+                    const words = user.title.split(" ");
+                    // console.log(words)
+                    if (words.length > 7) {
+                        title.innerHTML = words.slice(0, 7).join(" ") + "...";
+                    } else {
+                        title.innerHTML = user.title;
+                    }
 
-            const cart = document.createElement("button")
-            cart.classList.add("cart")
-            cart.innerHTML = "Add to cart"
 
-            btn_grp.prepend(cart)
-            btn_grp.prepend(add)
-            product.append(img)
-            product.append(title)
-            product.append(price)
-            product.append(btn_grp)
-            div.append(product)
-        });
-       })
+                    const price = document.createElement("span")
+                    price.classList.add("price")
+                    price.innerHTML = `$: ${user.price}`
+                    price.style.fontSize = "25px";
 
-            
-            
+
+                    const btn_grp = document.createElement("div")
+                    btn_grp.classList.add("button-group")
+
+                    const add = document.createElement("button")
+                    add.classList.add("wishlist")
+                    add.innerHTML = "Add to Wishlist"
+
+                    const cart = document.createElement("button")
+                    cart.classList.add("cart")
+                    cart.innerHTML = "Add to cart"
+
+                    btn_grp.prepend(cart)
+                    btn_grp.prepend(add)
+                    product.append(img)
+                    product.append(title)
+                    product.append(price)
+                    product.append(btn_grp)
+                    div.append(product)
+                });
+            })
+
+
+
     </script>
 </body>
+
 </html>
